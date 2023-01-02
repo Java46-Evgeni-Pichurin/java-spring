@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import telran.spring.controller.MessageMenuFactory;
 import telran.spring.controller.MessageSender;
 import telran.spring.view.ConsoleInputOutput;
 
@@ -11,12 +12,10 @@ import telran.spring.view.ConsoleInputOutput;
 public class SpringArchitectureApplication {
 
 	public static void main(String[] args) {
-		
 		ConfigurableApplicationContext ct =
 				SpringApplication.run(SpringArchitectureApplication.class, args);
-		MessageSender messageSender = ct.getBean(MessageSender.class);
-		messageSender.perform(new ConsoleInputOutput());
+		MessageSender messageMenuFactory = ct.getBean(MessageSender.class);
+		messageMenuFactory.perform();
 		ct.close();
 	}
-
 }
