@@ -19,11 +19,6 @@ public class MessageSender extends Menu {
         MessageSender.senders = senders;
     }
 
-    public void menu() {
-        Menu menu = new Menu("Main menu", getItems());
-        menu.perform(new ConsoleInputOutput());
-    }
-
     private static ArrayList<Item> getItems() {
         return new ArrayList<>(List.of(
                 Item.of("Sending message", MessageSender::send),
