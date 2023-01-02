@@ -11,44 +11,26 @@ import telran.spring.view.Item;
 import telran.spring.view.menu.Menu;
 
 @Component
-public class MessageSender {
-    Map<String, Sender> senders;
+public class MessageSender extends Menu {
+    static Map<String, Sender> senders;
 
     public MessageSender(Map<String, Sender> senders) {
-
-        this.senders = senders;
+        super("Main menu", getItems());
+        MessageSender.senders = senders;
     }
 
     public void menu() {
-//        Scanner scanner = new Scanner(System.in);
-//        String line;
-//        while (true) {
-//            System.out.printf("enter type from %s or exit\n", senders.keySet());
-//            line = scanner.nextLine();
-//            if (line.equalsIgnoreCase("exit")) {
-//                break;
-//            }
-//            Sender sender = senders.get(line);
-//            if (sender == null) {
-//                System.out.println(line + " type doesn't exist");
-//            } else {
-//                System.out.println("Enter text");
-//                line = scanner.nextLine();
-//                sender.send(line);
-//            }
-//        }
-
         Menu menu = new Menu("Main menu", getItems());
         menu.perform(new ConsoleInputOutput());
     }
 
-    private ArrayList<Item> getItems() {
+    private static ArrayList<Item> getItems() {
         return new ArrayList<>(List.of(
-                Item.of("Sending message", this::send),
+                Item.of("Sending message", MessageSender::send),
                 Item.exit("Exit")));
     }
 
-    private void send(InputOutput io) {
+    private static void send(InputOutput io) {
         List<String> list = senders.keySet().stream().toList();
         String option = null;
         while (option == null) {
