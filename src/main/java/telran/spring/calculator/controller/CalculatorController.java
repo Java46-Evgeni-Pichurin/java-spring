@@ -19,7 +19,7 @@ public class CalculatorController {
     @PostMapping
     String calculate(@RequestBody OperationData operationData) {
         Operation operation = operations.get(operationData.type);
-        return operation != null ? operation.perform(operationData) : "Wrong type " + operationData.type;
+        return operation != null ? operation.execute(operationData) : "Wrong type " + operationData.type;
     }
 
     @GetMapping

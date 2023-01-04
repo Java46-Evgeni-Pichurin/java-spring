@@ -8,7 +8,7 @@ import telran.spring.calculator.dto.OperationData;
 public class DatesSimpleOperation implements Operation {
 
     @Override
-    public String perform(OperationData operationData) {
+    public String execute(OperationData operationData) {
         return null;
     }
 }

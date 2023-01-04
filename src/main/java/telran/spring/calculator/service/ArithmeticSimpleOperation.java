@@ -8,13 +8,18 @@ import telran.spring.calculator.dto.OperationData;
 public class ArithmeticSimpleOperation implements Operation {
 
     @Override
-    public String perform(OperationData operationData) {
+    public String execute(OperationData operationData) {
         ArithmeticOperationData data = (ArithmeticOperationData) operationData;
-        return String.format("The result of arithmetic operation %s is %s",
-                data.operand1 + data.operation + data.operand2, getResult(data));
+        return String.format("%s",
+                getResult(data, "+", "Sum") +
+                getResult(data, "-", "Difference") +
+                getResult(data, "*", "Multiplication") +
+                getResult(data, "/", "Division"));
     }
 
-    private double getResult(ArithmeticOperationData data) {
-        return Double.parseDouble(String.format("%f%s%f", data.operand1, data.operation, data.operand2));
+    private String getResult(ArithmeticOperationData data, String operation, String operationName) {
+        return String.format("%s: %s\n",
+                operationName,
+                Double.parseDouble(String.format("%f%s%f", data.operand1, operation, data.operand2)));
     }
 }
