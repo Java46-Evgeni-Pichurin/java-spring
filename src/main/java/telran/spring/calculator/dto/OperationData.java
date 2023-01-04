@@ -9,6 +9,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonSubTypes({@Type(ArithmeticOperationData.class), @Type(DateDaysOperationData.class),
         @Type(DatesOperationData.class)})
 public class OperationData {
-    public String type;
-    public String text;
+    public String operationName;
+    public String additionalData;
 }
