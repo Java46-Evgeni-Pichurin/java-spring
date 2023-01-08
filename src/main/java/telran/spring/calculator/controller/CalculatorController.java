@@ -2,6 +2,7 @@ package telran.spring.calculator.controller;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +35,16 @@ public class CalculatorController {
     Set<String> getAllOperationNames() {
         return operationServices.keySet();
     }
+
     @PostConstruct
     void convertToOperationNamesMap() {
-        operationsList.forEach(o -> operationServices.put(o.getClass().getSimpleName(), o));
+        List<String> operationNames = operationsList.stream().map(operation -> operation.getClass().getSimpleName()
+                .replaceAll("Operation", "")
+                .replaceAll("(?=[A-Z]+)", "-")
+                .replaceFirst("-", "")
+                .toLowerCase()).toList();
+        for (int i = 0; i < operationNames.size(); i++) {
+            operationServices.put(operationNames.get(i), operationsList.get(i));
+        }
     }
 }
