@@ -3,6 +3,7 @@ package telran.spring.calculator.controller;
 
 import java.util.*;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,11 @@ import telran.spring.calculator.service.Operation;
 public class CalculatorController {
     @Value("${app.message.wrong.cast: Wrong casting }")
     String wrongTypeMessage;
-    Map<String, Operation> operationServices;
+    Map<String, Operation> operationServices = new HashMap<>();
+    List<Operation> operationsList;
 
-    public CalculatorController(Map<String, Operation> operationServices) {
-        this.operationServices = operationServices;
+    public CalculatorController(List<Operation> operationsList) {
+        this.operationsList = operationsList;
     }
 
     @PostMapping
@@ -32,6 +34,8 @@ public class CalculatorController {
     Set<String> getAllOperationNames() {
         return operationServices.keySet();
     }
-
-
+    @PostConstruct
+    void convertToOperationNamesMap() {
+        operationsList.forEach(o -> operationServices.put(o.getClass().getSimpleName(), o));
+    }
 }
