@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import telran.spring.calculator.dto.DateDaysOperationData;
 import telran.spring.calculator.dto.OperationData;
 
-@Service()
+@Service("dates-simple")
 public class DatesSimpleOperation implements Operation {
     @Value("${app.message.wrong.operation.date.format: Wrong date format }")
     String wrongDateFormatMessage;

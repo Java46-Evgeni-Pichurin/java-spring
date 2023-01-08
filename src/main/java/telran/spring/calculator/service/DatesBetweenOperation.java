@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import telran.spring.calculator.dto.DatesOperationData;
 import telran.spring.calculator.dto.OperationData;
 
-@Service()
+@Service("dates-between")
 public class DatesBetweenOperation implements Operation {
     @Value("${app.message.wrong.operation.date.format: Wrong date format }")
     String wrongDateFormatMessage;

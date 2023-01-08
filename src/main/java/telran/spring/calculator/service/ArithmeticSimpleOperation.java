@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import telran.spring.calculator.dto.*;
 
-@Service()
+@Service("arithmetic-simple")
 public class ArithmeticSimpleOperation implements Operation {
     @Value("${app.message.wrong.operation.arithmetic: Wrong operation }")
     String wrongOperationMessage;
