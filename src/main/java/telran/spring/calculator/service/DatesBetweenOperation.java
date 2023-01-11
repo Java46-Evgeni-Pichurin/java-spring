@@ -21,14 +21,19 @@ public class DatesBetweenOperation implements Operation {
         try {
             DatesOperationData datesData = (DatesOperationData) data;
             if (datesData.additionalData != null) {
+                LOG.error("Exception {}", wrongAdditionalDataMessage);
                 return wrongAdditionalDataMessage;
             }
             LocalDate dateFrom = LocalDate.parse(datesData.dateFrom);
             LocalDate dateTo = LocalDate.parse(datesData.dateTo);
-            return ChronoUnit.DAYS.between(dateFrom, dateTo) + "";
+            String result = ChronoUnit.DAYS.between(dateFrom, dateTo) + "";
+            LOG.debug("Message: {}", result);
+            return result;
         } catch (DateTimeParseException e) {
+            LOG.error("Exception {}", wrongDateFormatMessage);
             return wrongDateFormatMessage;
         } catch (Exception e) {
+            LOG.error("Exception {}", e.getMessage());
             return e.getMessage();
         }
     }

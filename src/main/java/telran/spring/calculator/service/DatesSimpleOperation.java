@@ -27,14 +27,18 @@ public class DatesSimpleOperation implements Operation {
                     days = -days;
                 }
                 else {
+                    LOG.error("Exception {}", wrongAdditionalDataMessage);
                     return wrongAdditionalDataMessage;
                 }
-
             }
-            return date.plusDays(days).toString();
+            String result = date.plusDays(days).toString();
+            LOG.debug("Message: {}", result);
+            return result;
         } catch (DateTimeParseException e) {
+            LOG.error("Exception {}", wrongDateFormatMessage);
             return wrongDateFormatMessage;
         } catch (Exception e) {
+            LOG.error("Exception {}", e.getMessage());
             return e.getMessage();
         }
     }

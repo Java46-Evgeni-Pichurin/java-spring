@@ -28,8 +28,11 @@ public class ArithmeticSimpleOperation implements Operation {
             ArithmeticOperationData arithmeticData = (ArithmeticOperationData) data;
             var function = operations.getOrDefault(data.additionalData,
                     (o1, o2) -> wrongOperationMessage);
-            return function.apply(arithmeticData.operand1, arithmeticData.operand2);
+            String result = function.apply(arithmeticData.operand1, arithmeticData.operand2);
+            LOG.debug("Message: {}", result);
+            return result;
         } catch (Exception e) {
+            LOG.error("Exception {}", e.getMessage());
             return e.getMessage();
         }
     }
