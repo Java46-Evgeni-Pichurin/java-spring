@@ -32,4 +32,9 @@ public class DatesBetweenOperation implements Operation {
             return e.getMessage();
         }
     }
+
+    @Override
+    public String getServiceName() {
+        return "dates-between";
+    }
 }

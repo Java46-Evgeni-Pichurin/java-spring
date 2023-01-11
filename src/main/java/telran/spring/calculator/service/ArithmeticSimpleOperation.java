@@ -33,4 +33,9 @@ public class ArithmeticSimpleOperation implements Operation {
             return e.getMessage();
         }
     }
+
+    @Override
+    public String getServiceName() {
+        return "arithmetic-operation";
+    }
 }

@@ -38,4 +38,9 @@ public class DatesSimpleOperation implements Operation {
             return e.getMessage();
         }
     }
+
+    @Override
+    public String getServiceName() {
+        return "dates-simple";
+    }
 }
