@@ -35,28 +35,23 @@ class CalculatorControllerTest {
 
     @Test
     void postPerformTest() {
-        IntStream.range(0, NUM_OF_CLIENTS).forEach(request -> {
-            new Thread(() -> {
-                IntStream.range(0, NUM_OF_REQUESTS).forEach(r ->
-                {
+        Runnable runnable = () ->
+                IntStream.range(0, NUM_OF_REQUESTS).forEach(r -> {
                     try {
                         sendGetRequest();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 });
-            }).start();
-        });
+        IntStream.range(0, NUM_OF_CLIENTS).forEach(request -> new Thread(runnable).start());
     }
 
-    private void sendGetRequest() throws Exception {
+    synchronized private void sendGetRequest() throws Exception {
         String messageJSON = mapper.writeValueAsString(TestObjects.arithmeticData);
         mockMvc.perform(post("http://localhost:8080/calculator")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(messageJSON)).andExpect(status().isOk());
     }
-
-
 
 
 //    @Test
