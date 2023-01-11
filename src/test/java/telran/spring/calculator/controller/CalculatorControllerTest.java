@@ -30,7 +30,7 @@ class CalculatorControllerTest {
 
     @Test
     void rightDataControllerTest() throws Exception {
-        sendGetRequest();
+        sendPostRequest();
     }
 
     @Test
@@ -38,7 +38,7 @@ class CalculatorControllerTest {
         Runnable runnable = () ->
                 IntStream.range(0, NUM_OF_REQUESTS).forEach(r -> {
                     try {
-                        sendGetRequest();
+                        sendPostRequest();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -46,7 +46,7 @@ class CalculatorControllerTest {
         IntStream.range(0, NUM_OF_CLIENTS).forEach(request -> new Thread(runnable).start());
     }
 
-    synchronized private void sendGetRequest() throws Exception {
+    synchronized private void sendPostRequest() throws Exception {
         String messageJSON = mapper.writeValueAsString(TestObjects.arithmeticData);
         mockMvc.perform(post("http://localhost:8080/calculator")
                 .contentType(MediaType.APPLICATION_JSON)
