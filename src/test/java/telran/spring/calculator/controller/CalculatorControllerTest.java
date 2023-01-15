@@ -1,9 +1,9 @@
 package telran.spring.calculator.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -11,55 +11,55 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import telran.spring.calculator.TestObjects;
-
-import java.util.stream.IntStream;
+import telran.spring.calculator.dto.*;
 
 @WebMvcTest(CalculatorController.class)
 class CalculatorControllerTest {
-    private static final int NUM_OF_REQUESTS = 1_000;
-    private static final int NUM_OF_CLIENTS = 500;
     @Autowired
     MockMvc mockMvc;
     ObjectMapper mapper = new ObjectMapper();
 
-    @BeforeEach
-    void restoreData() {
-        TestObjects.restoreArithmeticData();
-    }
-
     @Test
-    void rightDataControllerTest() throws Exception {
-        sendPostRequest();
-    }
-
-    @Test
-    void postPerformTest() {
-        Runnable runnable = () ->
-                IntStream.range(0, NUM_OF_REQUESTS).forEach(r -> {
-                    try {
-                        sendPostRequest();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-        IntStream.range(0, NUM_OF_CLIENTS).forEach(request -> new Thread(runnable).start());
-    }
-
-    synchronized private void sendPostRequest() throws Exception {
-        String messageJSON = mapper.writeValueAsString(TestObjects.arithmeticData);
+    void operationResultRightDto() throws Exception {
+        ArithmeticOperationData data = new ArithmeticOperationData();
+        data.operationName = "arithmetic-simple";
+        data.additionalData = "*";
+        data.operand1 = 20.0;
+        data.operand2 = 30.0;
+        String dataJSON = mapper.writeValueAsString(data);
         mockMvc.perform(post("http://localhost:8080/calculator")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(messageJSON)).andExpect(status().isOk());
+                .content(dataJSON)).andExpect(status().isOk());
     }
 
+    @Test
+    void operationResultWrongDataDates() throws Exception {
+        DatesOperationData data = new DatesOperationData();
+        data.operationName = "dates-simple";
+        data.dateFrom = "100000";
+        runTestBadRequest(data);
 
-//    @Test
-//    void wrongDataControllerTest() throws Exception {
-//        TestObjects.arithmeticData.operand2 = null;
-//        String messageJSON = mapper.writeValueAsString(TestObjects.arithmeticData);
-//        mockMvc.perform(post("http://localhost:8080/calculator")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(messageJSON)).andExpect(status().isBadRequest());
-//    }
+    }
+
+    @Test
+    void operationResultWrongDataDatesSimple() throws Exception {
+        DateDaysOperationData data = new DateDaysOperationData();
+        data.operationName = "dates-simple";
+        data.days = -20;
+        runTestBadRequest(data);
+
+    }
+
+    @Test
+    void getTypesRequestTest() throws Exception {
+        mockMvc.perform(get("http://localhost:8080/calculator"))
+                .andExpect(status().isOk());
+    }
+
+    private void runTestBadRequest(OperationData data) throws Exception {
+        String dataJSON = mapper.writeValueAsString(data);
+        mockMvc.perform(post("http://localhost:8080/calculator")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(dataJSON)).andExpect(status().isBadRequest());
+    }
 }
