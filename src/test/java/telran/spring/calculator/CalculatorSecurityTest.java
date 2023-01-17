@@ -17,30 +17,33 @@ import telran.spring.calculator.security.SecurityConfiguration;
 @WebMvcTest(CalculatorController.class)
 @Import(SecurityConfiguration.class)
 public class CalculatorSecurityTest {
-	@Autowired
-	MockMvc mockMvc;
-	@Test
-	void rightAuthenticationAuthorization() throws Exception {
-		mockMvc.perform(post("http://localhost:8080/calculator")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("{}").with(user("admin").roles("ADMIN"))
-				).andExpect(status().isBadRequest());
-				
-	}
-	@Test
-	void wrongAuthentication() throws Exception {
-		mockMvc.perform(post("http://localhost:8080/calculator")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("{}"))
-				.andExpect(status().is(401));
-				
-	}
-	@Test
-	void wrongAuthorization() throws Exception {
-		mockMvc.perform(post("http://localhost:8080/calculator")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content("{}").with(user("admin"))
-				).andExpect(status().is(403));
-				
-	}
+    @Autowired
+    MockMvc mockMvc;
+
+    @Test
+    void rightAuthenticationAuthorization() throws Exception {
+        mockMvc.perform(post("http://localhost:8080/calculator")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}").with(user("admin").roles("ADMIN"))
+        ).andExpect(status().isBadRequest());
+
+    }
+
+    @Test
+    void wrongAuthentication() throws Exception {
+        mockMvc.perform(post("http://localhost:8080/calculator")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}"))
+                .andExpect(status().is(401));
+
+    }
+
+    @Test
+    void wrongAuthorization() throws Exception {
+        mockMvc.perform(post("http://localhost:8080/calculator")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{}").with(user("admin"))
+        ).andExpect(status().is(403));
+
+    }
 }
