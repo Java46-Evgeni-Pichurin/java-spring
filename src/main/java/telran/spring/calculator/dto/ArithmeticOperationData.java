@@ -1,6 +1,10 @@
 package telran.spring.calculator.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ArithmeticOperationData extends OperationData {
-    public Double operand1;
-    public Double operand2;
+	@NotNull
+	public Double operand1;
+	@NotNull
+	public Double operand2;
 }

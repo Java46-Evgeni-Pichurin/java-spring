@@ -1,50 +1,44 @@
 package telran.spring.calculator.service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import telran.spring.calculator.dto.DateDaysOperationData;
 import telran.spring.calculator.dto.OperationData;
+@Service
+public class DatesSimpleOperation extends AbstractOperation {
+	static Logger LOG = LoggerFactory.getLogger(DatesSimpleOperation.class);
+	@Override
+	public String execute(OperationData data) {
+		String res;
+		try {
+			DateDaysOperationData dateData = (DateDaysOperationData) data;
+			LOG.debug("computing date {} days {} from {}", data.additionalData,
+					dateData.days, dateData.date);
+			LocalDate date = LocalDate.parse(dateData.date);
+			int days = dateData.days;
+			if(data.additionalData.equalsIgnoreCase("before")) {
+				days = -days;
+			}
+			res = date.plusDays(days).toString();
+		} catch (ClassCastException e) {
+			res = wrongDtoMessage;
+			LOG.error("Date after/before finding but received data for class {} ",
+					data.getClass().getSimpleName());
+		} 
+		
+		
+		
+		return res;
+	}
 
-@Service()
-public class DatesSimpleOperation implements Operation {
-    @Value("${app.message.wrong.operation.date.format: Wrong date format }")
-    String wrongDateFormatMessage;
-    @Value("${app.message.wrong.additional.data: Wrong additional data }")
-    String wrongAdditionalDataMessage;
+	@Override
+	public String getOperationName() {
 
-    @Override
-    public String execute(OperationData data) {
-        try {
-            DateDaysOperationData dateData = (DateDaysOperationData) data;
-            LocalDate date = LocalDate.parse(dateData.date);
-            int days = dateData.days;
-            if (data.additionalData != null) {
-                if (data.additionalData.equalsIgnoreCase("before")) {
-                    days = -days;
-                }
-                else {
-                    LOG.error("Exception {}", wrongAdditionalDataMessage);
-                    return wrongAdditionalDataMessage;
-                }
-            }
-            String result = date.plusDays(days).toString();
-            LOG.debug("Message: {}", result);
-            return result;
-        } catch (DateTimeParseException e) {
-            LOG.error("Exception {}", wrongDateFormatMessage);
-            return wrongDateFormatMessage;
-        } catch (Exception e) {
-            LOG.error("Exception {}", e.getMessage());
-            return e.getMessage();
-        }
-    }
+		return "dates-simple";
+	}
 
-    @Override
-    public String getServiceName() {
-        return "dates-simple";
-    }
 }
