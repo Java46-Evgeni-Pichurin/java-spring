@@ -10,7 +10,6 @@ import jakarta.annotation.PreDestroy;
 
 @SpringBootApplication
 public class CalculatorAppl {
-
     private static final String SHUTDOWN = "shutdown";
 
     public static void main(String[] args) {
@@ -23,14 +22,11 @@ public class CalculatorAppl {
                 break;
             }
         }
-
         ctx.close();
-
     }
 
     @PreDestroy
     void preDestroy() {
         System.out.println("bye - shutdown has been performed");
     }
-
 }
