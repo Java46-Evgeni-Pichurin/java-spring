@@ -18,13 +18,13 @@ import java.util.Map;
 public class AccountingManager {
     PasswordEncoder encoder;
     UserDetailsManager manager;
-    AccountingServiceInterface service;
+    AccountingService service;
 
     Logger LOG = LoggerFactory.getLogger(AccountingController.class);
     @Value("${app.message.wrong.operation}")
     String wrongOperationMessage;
 
-    public AccountingManager(PasswordEncoder encoder, UserDetailsManager manager, AccountingServiceInterface service) {
+    public AccountingManager(PasswordEncoder encoder, UserDetailsManager manager, AccountingService service) {
         this.encoder = encoder;
         this.manager = manager;
         this.service = service;
