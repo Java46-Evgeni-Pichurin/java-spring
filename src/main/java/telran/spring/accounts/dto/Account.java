@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class Account implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    @Email
+    @Email @NotNull
     public String username;
-    @Size(min = 6)
+    @Size(min = 6) @NotNull
     public String password;
-    @Pattern(regexp = "USER|ADMIN")
+    @Pattern(regexp = "USER|ADMIN") @NotNull
     public String role;
 }
