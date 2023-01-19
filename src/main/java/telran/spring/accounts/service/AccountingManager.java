@@ -1,13 +1,9 @@
 package telran.spring.accounts.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import telran.spring.accounts.controller.AccountingController;
 import telran.spring.accounts.dto.Account;
 
 import java.util.Map;
@@ -17,10 +13,6 @@ public class AccountingManager {
     PasswordEncoder encoder;
     UserDetailsManager manager;
     AccountingService service;
-
-    Logger LOG = LoggerFactory.getLogger(AccountingController.class);
-    @Value("${app.message.wrong.operation}")
-    String wrongOperationMessage;
 
     public AccountingManager(PasswordEncoder encoder, UserDetailsManager manager, AccountingService service) {
         this.encoder = encoder;

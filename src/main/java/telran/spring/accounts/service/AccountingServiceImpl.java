@@ -62,7 +62,7 @@ public class AccountingServiceImpl implements AccountingService {
     public void writeAccounts(String path) {
         try {
             mapper.writerWithDefaultPrettyPrinter().writeValue(Paths.get(path).toFile(), accounts);
-            LOG.info("Writing to file:");
+            LOG.info("Writing to file: {}", path);
         } catch (Exception e) {
             LOG.error(ioMessage + " " + e.getMessage());
         }
