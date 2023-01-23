@@ -12,6 +12,6 @@ public class Account implements Serializable {
     public String username;
     @Size(min = 6) @NotNull
     public String password;
-    @Pattern(regexp = "USER|ADMIN") @NotNull
+    @NotNull
     public String role;
 }
