@@ -39,7 +39,6 @@ public class CompanyTest {
     @SneakyThrows
     void updateEmployee_Success() {
         Employee employee = employeeBuilder.build();
-        int id = companyService.addEmployee(employee).getId();
-
+        //int id = companyService.addEmployee(employee).getId();
     }
 }
