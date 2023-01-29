@@ -19,7 +19,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     private static final int MIN_ID = 100_000_000;
     private static final int MAX_ID = 999_999_999;
-    Map<Integer, Employee> employees = new ConcurrentHashMap<>();
+    Map<Integer, Employee> employees = new HashMap<>();
     Map<Integer, Map<Integer, Employee>> employeesByBirthMonth = new HashMap<>();
     TreeMap<Integer, Map<Integer, Employee>> employeesBySalary = new TreeMap<>();
     TreeMap<Integer, Map<Integer, Employee>> employeesByAge = new TreeMap<>();
@@ -95,9 +95,10 @@ public class CompanyServiceImpl implements CompanyService {
             TypeReference<HashMap<Integer, Employee>> typeRef = new TypeReference<>() {};
             employees = mapper.readValue(Paths.get(companyPath).toFile(), typeRef);
             LOG.info("Reading file: {}", companyPath);
-            TypeReference<TreeMap<Integer, Map<Integer, Employee>>> typeRefTreeMap = new TypeReference<>() {};
-            employeesByBirthMonth = mapper.readValue(Paths.get(byMonthPath).toFile(), typeRefTreeMap);
+            TypeReference<HashMap<Integer, Map<Integer, Employee>>> typeRefByMonth = new TypeReference<>() {};
+            employeesByBirthMonth = mapper.readValue(Paths.get(byMonthPath).toFile(), typeRefByMonth);
             LOG.info("Reading file: {}", byMonthPath);
+            TypeReference<TreeMap<Integer, Map<Integer, Employee>>> typeRefTreeMap = new TypeReference<>() {};
             employeesByAge = mapper.readValue(Paths.get(byAgePath).toFile(), typeRefTreeMap);
             LOG.info("Reading file: {}", byAgePath);
             employeesBySalary = mapper.readValue(Paths.get(bySalaryPath).toFile(), typeRefTreeMap);
