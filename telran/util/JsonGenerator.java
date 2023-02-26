@@ -4,11 +4,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import telran.util.model.Account;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
@@ -23,30 +26,25 @@ public class JsonGenerator {
     private static final String[] roles = {"ADMIN", "STATIST", "USER", "APPL_ADMIN"};
 
 
-
     public static void main(String[] args) {
         ObjectMapper mapper = new ObjectMapper();
-        ArrayList<String> accs = new ArrayList<>();
+        List<Account> list = new ArrayList<>();
         IntStream.range(0, N_ACCOUNTS).forEach(acc ->
-                {
-                    try {
-                        accs.add(
-                                mapper.writerWithDefaultPrettyPrinter().writeValueAsString(
-                            new Account(
-                                    String.format("account%d", acc+1),
-                                    String.valueOf(getChars()),
-                                    LocalDateTime.now().plus(getRandomNumber(TIME_RANGE_FROM, TIME_RANGE_TO + 1), ChronoUnit.HOURS)
-                                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss")),
-                                    getRoles(getRandomNumber(1, roles.length + 1))
-                                    )
-                                )
-                        );
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+                list.add(
+                        new Account(
+                                String.format("account%d", acc + 1),
+                                String.valueOf(getChars()),
+                                LocalDateTime.now().plus(getRandomNumber(TIME_RANGE_FROM, TIME_RANGE_TO + 1), ChronoUnit.HOURS)
+                                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss")),
+                                getRoles(getRandomNumber(1, roles.length + 1))
+                        )
+                )
         );
-        System.out.println(accs);
+        try {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("accounts.json"), list);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static String[] getRoles(int n_roles) {
