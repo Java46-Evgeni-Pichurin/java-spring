@@ -1,6 +1,5 @@
 package telran.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import telran.util.model.Account;
 
