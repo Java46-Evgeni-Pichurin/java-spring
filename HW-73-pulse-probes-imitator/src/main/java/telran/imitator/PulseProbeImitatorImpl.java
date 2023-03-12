@@ -22,9 +22,9 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
     @Value("${app.jump.probability: 5}")
     int probability; // percent
     @Value("${app.jump.multiplier: 35}")
-    int jumpMultiplier;
+    int jumpDifference;
     @Value("${app.no-jump.multiplier: 2}")
-    int noJumpMultiplier;
+    int noJumpDifference;
     int seqNumber = 1;
     HashMap<Long, HashMap<Long, Integer>> fullData = new HashMap<>(); // {id: {timestamp: probeValue}}
     HashMap<Long, Long> timestampData = new HashMap<>(); // {id: timestamp} - last update
@@ -72,10 +72,10 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
 
     private Integer updateDataAfterJump(long curId, long lastUpdate, int lastPulseValue, int factor) {
         LOG.warn(String.format("Patient with id - %d has jump!!!", curId));
-        return fullData.get(curId).replace(lastUpdate, lastPulseValue + jumpMultiplier * factor);
+        return fullData.get(curId).replace(lastUpdate, lastPulseValue + jumpDifference * factor);
     }
 
     private Integer updateDataWithoutJump(long curId, long lastUpdate, int lastPulseValue, int factor) {
-        return fullData.get(curId).replace(lastUpdate, lastPulseValue + noJumpMultiplier * factor);
+        return fullData.get(curId).replace(lastUpdate, lastPulseValue + noJumpDifference * factor);
     }
 }
