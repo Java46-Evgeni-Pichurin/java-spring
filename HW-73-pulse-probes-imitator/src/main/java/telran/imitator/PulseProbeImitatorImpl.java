@@ -40,7 +40,6 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
         }
         else {
             fullData.put(curId, getFirstProbe(curId, timestamp));
-            timestampData.put(curId, timestamp);
         }
         PulseProbe probe = new PulseProbe(curId, timestamp, seqNumber++, fullData.get(curId).get(timestamp));
         LOG.info(String.format("%d - Pulse value of patient with id - %d is %d, previous value was %d, timestamp: %s",
