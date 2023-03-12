@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import telran.monitoring.model.PulseProbe;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -41,8 +45,9 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
             timestampData.put(curId, timestamp);
         }
         PulseProbe probe = new PulseProbe(curId, timestamp, seqNumber++, fullData.get(curId).get(timestamp));
-        LOG.info(String.format("%d - Pulse value of patient with id - %d is %d, previous value was %d, timestamp: %d",
-                probe.sequenceNumber, probe.patientId, probe.value, prevPulseValue,probe.timestamp));
+        LOG.info(String.format("%d - Pulse value of patient with id - %d is %d, previous value was %d, timestamp: %s",
+                probe.sequenceNumber, probe.patientId, probe.value, prevPulseValue,
+                LocalDateTime.ofInstant(Instant.ofEpochMilli(probe.timestamp), ZoneId.systemDefault())));
         return probe;
     }
 
