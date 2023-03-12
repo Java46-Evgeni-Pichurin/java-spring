@@ -8,8 +8,6 @@ import telran.monitoring.model.PulseProbe;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
