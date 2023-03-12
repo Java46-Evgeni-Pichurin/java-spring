@@ -10,13 +10,6 @@ public class PulseProbesImitatorApplication {
 
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(PulseProbesImitatorApplication.class, args);
-		int x = 0;
-		PulseProbesImitator pulseProbesImitator = new PulseProbeImitatorImpl();
-		while (x < 100) {
-			Thread.sleep(10);
-			pulseProbesImitator.nextProbe();
-			x++;
-		}
 	}
 
 }
