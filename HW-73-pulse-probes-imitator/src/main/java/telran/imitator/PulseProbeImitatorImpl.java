@@ -28,7 +28,7 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
     int seqNumber = 1;
     HashMap<Long, HashMap<Long, Integer>> fullData = new HashMap<>(); // {id: {timestamp: probeValue}}
     HashMap<Long, Long> timestampData = new HashMap<>(); // {id: timestamp} - last update
-    private static Logger LOG = LoggerFactory.getLogger(PulseProbeImitatorImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PulseProbeImitatorImpl.class);
 
     @Override
     public PulseProbe nextProbe() {
