@@ -3,6 +3,8 @@ package telran.imitator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.stereotype.Service;
 import telran.monitoring.model.PulseProbe;
 
 import java.time.Instant;
@@ -11,6 +13,7 @@ import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Service
 public class PulseProbeImitatorImpl implements PulseProbesImitator{
 
     @Value("${app.patients.amount: 10}")
