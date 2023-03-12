@@ -65,7 +65,7 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
         int lastPulseValue = fullData.get(curId).get(lastUpdate);
         boolean hasJump = ThreadLocalRandom.current().nextDouble() < (probability / 100.0);
         timestampData.replace(curId, timestamp);
-        int factor = ThreadLocalRandom.current().nextDouble(1) > 0.5 ? 1 : -1;
+        int factor = ThreadLocalRandom.current().nextDouble() > 0.5 ? 1 : -1;
         return hasJump ? updateDataAfterJump(curId, lastUpdate, lastPulseValue, factor) :
                 updateDataWithoutJump(curId, lastUpdate, lastPulseValue, factor);
     }
