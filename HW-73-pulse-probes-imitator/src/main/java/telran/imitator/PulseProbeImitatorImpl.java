@@ -23,7 +23,7 @@ public class PulseProbeImitatorImpl implements PulseProbesImitator{
     int probability; // percent
     @Value("${app.jump.multiplier: 35}")
     int jumpMultiplier;
-    @Value("${app.no-jump.multiplier: 5}")
+    @Value("${app.no-jump.multiplier: 2}")
     int noJumpMultiplier;
     int seqNumber = 1;
     HashMap<Long, HashMap<Long, Integer>> fullData = new HashMap<>(); // {id: {timestamp: probeValue}}
