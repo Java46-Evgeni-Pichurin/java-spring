@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class NotificationDataProviderAppl {
-    public static void main(String[] args) {
-        SpringApplication.run(NotificationDataProviderAppl.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(NotificationDataProviderAppl.class, args);
+
+	}
+
 }

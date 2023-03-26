@@ -14,26 +14,26 @@ import telran.monitoring.service.AnalyzerService;
 
 @SpringBootApplication
 public class AnalyzerAppl {
-    @Autowired
-    AnalyzerService analyzerService;
-    @Autowired
-    StreamBridge streamBridge;
-    @Value("${app.jumps.binding.name:jumps-out-0}")
-    private String bindingName;
+	@Autowired
+AnalyzerService analyzerService;
+	@Autowired
+	StreamBridge streamBridge;
+	@Value("${app.jumps.binding.name:jumps-out-0}")
+	private String bindingName;
+	public static void main(String[] args) {
+		SpringApplication.run(AnalyzerAppl.class, args);
 
-    public static void main(String[] args) {
-        SpringApplication.run(AnalyzerAppl.class, args);
-    }
+	}
+	@Bean
+	Consumer<PulseProbe> pulseProbeConsumer() {
+		return this::pulseProbeAnalyzing;
+	}
+	void pulseProbeAnalyzing(PulseProbe pulseProbe) {
+		PulseJump pulseJump = analyzerService.processPulseProbe(pulseProbe);
+		if(pulseJump != null) {
+			streamBridge.send(bindingName, pulseJump);
+		}
+		
+	}
 
-    @Bean
-    Consumer<PulseProbe> pulseProbeConsumer() {
-        return this::pulseProbeAnalyzing;
-    }
-
-    void pulseProbeAnalyzing(PulseProbe pulseProbe) {
-        PulseJump pulseJump = analyzerService.processPulseProbe(pulseProbe);
-        if (pulseJump != null) {
-            streamBridge.send(bindingName, pulseJump);
-        }
-    }
 }

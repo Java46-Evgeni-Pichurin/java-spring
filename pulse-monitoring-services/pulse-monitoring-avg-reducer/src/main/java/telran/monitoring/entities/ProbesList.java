@@ -1,33 +1,30 @@
 package telran.monitoring.entities;
 
+import java.util.*;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import java.util.List;
-
 @RedisHash
 public class ProbesList {
-    @Id
-    long patientId;
-    List<Integer> values;
+	@Id
+	long patientId;
+	List<Integer> pulseValues = new ArrayList<>();
 
-    public ProbesList(long patientId, List<Integer> values) {
-        this.patientId = patientId;
-        this.values = values;
-    }
+	public ProbesList(long patientId) {
+		this.patientId = patientId;
+	}
 
-    public ProbesList() {
-    }
+	public ProbesList() {
 
-    public long getPatientId() {
-        return patientId;
-    }
+	}
 
-    public List<Integer> getValues() {
-        return values;
-    }
+	public long getPatientId() {
+		return patientId;
+	}
 
-    public void setValues(List<Integer> values) {
-        this.values = values;
-    }
+	public List<Integer> getPulseValues() {
+		return pulseValues;
+	}
+
 }

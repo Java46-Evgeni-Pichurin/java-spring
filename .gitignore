@@ -18,3 +18,6 @@
 /pulse-monitoring-services/pulse-monitoring-notification-data-provider/target/
 /pulse-monitoring-services/pulse-monitoring-notification-data-provider/pulse-monitoring-notification-data-provider.iml
 /.idea/
+/avg-values-back-office/target/
+/pulse-monitoring-services/pulse-monitoring-avg-populator/target/
+/avg-values-back-office.iml
