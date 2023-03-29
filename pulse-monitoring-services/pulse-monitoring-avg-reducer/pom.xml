@@ -9,19 +9,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>telran.monitoring.entities</groupId>
-			<artifactId>pulse-monitoring-entities</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>telran.monitoring.repositories</groupId>
-            <artifactId>pulse-monitoring-repositories</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 </project>

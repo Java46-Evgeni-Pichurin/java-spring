@@ -25,17 +25,5 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>telran.monitoring.entities</groupId>
-			<artifactId>pulse-monitoring-entities</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-        <dependency>
-            <groupId>telran.monitoring.repositories</groupId>
-            <artifactId>pulse-monitoring-repositories</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 </project>

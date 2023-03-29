@@ -24,7 +24,7 @@ import telran.monitoring.model.NotificationData;
 import telran.monitoring.model.PulseJump;
 import telran.monitoring.service.NotificationDataProvider;
 
-@SpringBootTest
+@SpringBootTest(classes = JumpsNotifierAppl.class)
 @Import(TestChannelBinderConfiguration.class)
 class JumpsNotifierTest {
     private static final long PATIENT_ID = 123;
