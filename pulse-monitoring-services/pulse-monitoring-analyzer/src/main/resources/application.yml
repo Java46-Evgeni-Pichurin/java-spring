@@ -1,0 +1,31 @@
+logging:
+  level:
+    telran: trace
+app:
+  jumps:
+    binding:
+      name: name=jumps-out-0
+spring:
+  kafka:
+    bootstrap-servers: glider.srvs.cloudkafka.com:9094
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: SCRAM-SHA-512
+        jaas:
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="kclgkokd" password="${CLOUDKARAFKA_PASSWORD}";
+  cloud:
+    stream:
+      bindings:
+        pulseProbeConsumer-in-0:
+          destination: kclgkokd-jumps
+          group: kclgkokd-analyzer
+        jumps-out-0:
+          destination: kclgkokd-jumps
+  data:
+    redis:
+      host: redis-19207.c3.eu-west-1-1.ec2.cloud.redislabs.com
+      port: 19207
+      username: default
+      password: ${REDIS_PASSWORD}
