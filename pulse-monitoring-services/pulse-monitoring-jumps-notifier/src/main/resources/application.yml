@@ -9,9 +9,9 @@ spring:
       security:
         protocol: SASL_SSL
       sasl:
-        mechanism: SCRAM-SHA-256
+        mechanism: SCRAM-SHA-512
         jaas:
-          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="lwnrvyhm" password="${CLOUDKARAFKA_PASSWORD}";
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="kclgkokd" password="${CLOUDKARAFKA_PASSWORD}";
   cloud:
     stream:
       bindings:

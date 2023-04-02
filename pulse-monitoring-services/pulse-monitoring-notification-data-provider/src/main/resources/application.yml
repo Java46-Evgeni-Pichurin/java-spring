@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     password: ${POSTGRES_PASSWORD}
-    username: amqbudlm
-    url: jdbc:postgresql://kandula.db.elephantsql.com/amqbudlm
+    username: opxmpdyw
+    url: jdbc:postgresql://kandula.db.elephantsql.com/opxmpdyw
     hikari:
       maximum-pool-size: 1
   jpa:
