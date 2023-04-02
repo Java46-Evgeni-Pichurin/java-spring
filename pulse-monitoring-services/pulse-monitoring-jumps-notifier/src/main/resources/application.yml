@@ -18,3 +18,16 @@ spring:
         jumpsConsumer-in-0:
           destination: lwnrvyhm-jumps
           group: lwnrvyhm-notifier
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USER}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          debug: true
