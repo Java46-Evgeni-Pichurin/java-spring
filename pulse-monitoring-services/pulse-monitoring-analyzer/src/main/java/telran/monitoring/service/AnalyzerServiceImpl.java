@@ -2,6 +2,7 @@ package telran.monitoring.service;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +15,15 @@ import telran.monitoring.repositories.redis.LastProbeRepository;
 public class AnalyzerServiceImpl implements AnalyzerService {
     public static Logger LOG = LoggerFactory.getLogger(AnalyzerService.class);
     private final LastProbeRepository lastProbeRepository;
+    private final StreamBridge streamBridge;
     @Value("${app.jump.threshold:0.3}")
     private double jumpThreshold;
+    @Value("${app.jumps.binding.name:jumps-out-0}")
+    private String bindingName;
 
-    public AnalyzerServiceImpl(LastProbeRepository lastProbeRepository) {
+    public AnalyzerServiceImpl(LastProbeRepository lastProbeRepository, StreamBridge streamBridge) {
         this.lastProbeRepository = lastProbeRepository;
+        this.streamBridge = streamBridge;
     }
 
     @Override
@@ -43,5 +48,13 @@ public class AnalyzerServiceImpl implements AnalyzerService {
 
     private boolean isJump(int lastValue, int currentValue) {
         return Math.abs(currentValue - lastValue) >= lastValue * jumpThreshold;
+    }
+
+    @Override
+    public void pulseProbeAnalyzing(PulseProbe pulseProbe) {
+        PulseJump pulseJump = this.processPulseProbe(pulseProbe);
+        if(pulseJump != null) {
+            streamBridge.send(bindingName, pulseJump);
+        }
     }
 }

@@ -1,33 +1,23 @@
 package telran.monitoring.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
-import telran.monitoring.AvgPopulatorAppl;
-import telran.monitoring.entities.mongodb.AvgPulseDoc;
+import org.springframework.context.annotation.Configuration;
 import telran.monitoring.model.PulseProbe;
-import telran.monitoring.repo.AvgPopulatorRepository;
+import telran.monitoring.service.AvgPopulator;
 
 import java.util.function.Consumer;
 
-@Service
+@Configuration
 public class AvgPopulatorConfiguration {
-    static Logger LOG = LoggerFactory.getLogger(AvgPopulatorAppl.class);
-    AvgPopulatorRepository avgPopulatorRepository;
+    AvgPopulator avgPopulator;
 
-    public AvgPopulatorConfiguration(AvgPopulatorRepository avgPopulatorRepository) {
-        this.avgPopulatorRepository = avgPopulatorRepository;
+    public AvgPopulatorConfiguration(AvgPopulator avgPopulator) {
+        this.avgPopulator = avgPopulator;
     }
 
     @Bean
     Consumer<PulseProbe> avgPulseConsumer() {
-        return this::getAvgPulseConsumer;
+        return avgPopulator::getAvgPulseConsumer;
     }
 
-    void getAvgPulseConsumer(PulseProbe pulseProbe) {
-        LOG.trace("received pulseprobe of patient {}", pulseProbe.patientId);
-        AvgPulseDoc pulseDoc = AvgPulseDoc.of(pulseProbe);
-        avgPopulatorRepository.save(pulseDoc);
-    }
 }

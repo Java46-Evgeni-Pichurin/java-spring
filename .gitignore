@@ -27,3 +27,7 @@
 /pulse-monitoring-entities/pulse-monitoring-entities.iml
 /pulse-monitoring-repositories/pulse-monitoring-repositories.iml
 /pulse-monitoring-services/avg-values-back-office/avg-values-back-office.iml
+/pulse-monitoring-dto/target/
+/pulse-monitoring-dto/pulse-monitoring-dto.iml
+/pulse-monitoring-repositories/target/
+/pulse-monitoring-services/avg-values-back-office/target/

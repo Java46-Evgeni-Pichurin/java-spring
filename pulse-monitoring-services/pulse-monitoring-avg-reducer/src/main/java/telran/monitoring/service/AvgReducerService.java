@@ -4,4 +4,5 @@ import telran.monitoring.model.PulseProbe;
 
 public interface AvgReducerService {
     Integer reduce(PulseProbe probe);
+    void processPulseProbe(PulseProbe probe);
 }

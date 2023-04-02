@@ -1,0 +1,23 @@
+logging:
+  level:
+    telran: trace
+
+spring:
+  kafka:
+    bootstrap-servers: glider.srvs.cloudkafka.com:9094
+    properties:
+      sasl:
+        mechanism: SCRAM-SHA-512
+        jaas:
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="kclgkokd" password="${CLOUDKARAFKA_PASSWORD}";
+
+  cloud:
+    stream:
+      bindings:
+        avgPulseConsumer-in-0:
+          destination: kclgkokd-default
+          group: kclgkokd-populator
+
+  data:
+    mongodb:
+      uri: mongodb+srv://root:${MONGO_PASSWORD}@cluster0.qxamzgx.mongodb.net/College?retryWrites=true&w=majority

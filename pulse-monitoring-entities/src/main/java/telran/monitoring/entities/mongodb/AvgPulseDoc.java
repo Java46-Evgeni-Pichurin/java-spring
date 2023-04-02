@@ -5,8 +5,8 @@ import java.util.Objects;
 
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import telran.monitoring.model.PulseProbe;
+
 
 @Document(collection = "documents")
 @Getter

@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>telran.monitoring</groupId>
 			<artifactId>pulse-monitoring-dto</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>telran.monitoring.entities</groupId>
