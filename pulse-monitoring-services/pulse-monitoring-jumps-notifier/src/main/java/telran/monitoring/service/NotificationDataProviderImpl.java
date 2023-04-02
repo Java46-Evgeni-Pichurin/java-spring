@@ -3,6 +3,7 @@ package telran.monitoring.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,7 +28,7 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
     @Value("${app.mail.subject: Pulse Jump Notification}")
     String subject;
 
-    public NotificationDataProviderImpl(RestTemplate restTemplate, JavaMailSender mailSender) {
+    public NotificationDataProviderImpl(@Lazy RestTemplate restTemplate, JavaMailSender mailSender) {
         this.restTemplate = restTemplate;
         this.mailSender = mailSender;
     }
