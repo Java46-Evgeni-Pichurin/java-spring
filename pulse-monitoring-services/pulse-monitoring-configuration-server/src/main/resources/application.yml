@@ -1,0 +1,9 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      enabled: false
+      server:
+        git:
+          uri: https://github.com/Java46-Evgeni-Pichurin/pulse-monitoring-config-repo

@@ -1,5 +1,6 @@
 package telran.monitoring.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import telran.monitoring.model.NotificationData;
 import telran.monitoring.model.PulseJump;
 
 @Service
+@Slf4j
 public class NotificationDataProviderImpl implements NotificationDataProvider {
     private final RestTemplate restTemplate;
     private final JavaMailSender mailSender;
@@ -38,11 +40,19 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
         ResponseEntity<NotificationData> response =
                 restTemplate.exchange(getFullUrl(patientId),
                         HttpMethod.GET, null, NotificationData.class);
-        return response.getBody();
+        NotificationData notificationData = response.getBody();
+        if (notificationData == null) {
+            log.error("there is no data for patient id: {}", patientId);
+        } else {
+            log.debug("doctor's email received from data provider: {}", notificationData.doctorEmail);
+        }
+        return notificationData;
     }
 
     private String getFullUrl(long patientId) {
-        return String.format("http://%s:%d/%s/%d", host, port, mappingUrl, patientId);
+        String url = String.format("http://%s:%d/%s/%d", host, port, mappingUrl, patientId);
+        log.debug("URL for communicating with data provider is {}", url);
+        return url;
     }
 
     @Override

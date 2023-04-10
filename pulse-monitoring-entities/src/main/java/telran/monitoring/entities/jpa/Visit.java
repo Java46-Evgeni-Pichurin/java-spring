@@ -21,4 +21,10 @@ public class Visit {
     @JoinColumn(name = "patient_id")
     @ManyToOne
     Patient patient;
+
+    public Visit(LocalDate date, Doctor doctor, Patient patient) {
+        this.date = date;
+        this.doctor = doctor;
+        this.patient = patient;
+    }
 }

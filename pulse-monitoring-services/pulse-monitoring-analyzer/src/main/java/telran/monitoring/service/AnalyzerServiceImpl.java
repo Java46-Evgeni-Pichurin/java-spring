@@ -16,7 +16,7 @@ public class AnalyzerServiceImpl implements AnalyzerService {
     public static Logger LOG = LoggerFactory.getLogger(AnalyzerService.class);
     private final LastProbeRepository lastProbeRepository;
     private final StreamBridge streamBridge;
-    @Value("${app.jump.threshold:0.3}")
+    @Value("${app.jumps.threshold:0.3}")
     private double jumpThreshold;
     @Value("${app.jumps.binding.name:jumps-out-0}")
     private String bindingName;
