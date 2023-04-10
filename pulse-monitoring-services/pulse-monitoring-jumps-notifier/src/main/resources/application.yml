@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: jumps-notifier
+  config:
+    import: optional:configserver:http://localhost:8888

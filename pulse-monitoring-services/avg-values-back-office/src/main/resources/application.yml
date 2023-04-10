@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: avg-values-back-office
+  config:
+    import: optional:configserver:http://localhost:8888

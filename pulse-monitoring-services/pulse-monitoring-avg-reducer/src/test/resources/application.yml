@@ -1,0 +1,13 @@
+logging:
+  level:
+    telran: trace
+app:
+  avg:
+    binding:
+      name: avg-reducer-out-0
+  reducing:
+    size: 3
+spring:
+  cloud:
+    config:
+      enabled: false

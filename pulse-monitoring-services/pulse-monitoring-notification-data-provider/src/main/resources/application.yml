@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: data-provider
+  config:
+    import: optional:configserver:http://localhost:8888
