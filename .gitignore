@@ -37,3 +37,7 @@
 /pulse-monitoring-services/visits-back-office/target/
 /exception-handling/exceptions-handling.iml
 /pulse-monitoring-services/pulse-monitoring-gateway/pulse-monitoring-gateway.iml
+/accounting-management/accounts.data
+/accounting-management/mvnw
+/accounting-management/mvnw.cmd
+/accounting-management/.mvn/
