@@ -2,6 +2,8 @@ package telran.monitoring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.client.RestTemplate;
 import telran.monitoring.model.PulseJump;
 import telran.monitoring.service.NotificationDataProvider;
@@ -25,5 +27,10 @@ public class JumpsNotifierConfig {
     @Bean
     RestTemplate getRestTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    JavaMailSender getJavaMailSender() {
+        return new JavaMailSenderImpl();
     }
 }

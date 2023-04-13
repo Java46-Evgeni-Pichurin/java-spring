@@ -1,5 +1,6 @@
 package telran.monitoring.model;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class PatientDto {
     public long id;
+    @NotEmpty
     public String name;
 
     @Override

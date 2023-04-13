@@ -1,5 +1,7 @@
 package telran.monitoring.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +10,10 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDto {
+    @Email
+    @NotEmpty
     public String email;
+    @NotEmpty
     public String name;
 
     @Override

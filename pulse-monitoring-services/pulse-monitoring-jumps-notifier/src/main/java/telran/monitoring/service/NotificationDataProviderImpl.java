@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import telran.monitoring.JumpsNotifierAppl;
 import telran.monitoring.model.NotificationData;
@@ -29,6 +30,8 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
     int port;
     @Value("${app.mail.subject: Pulse Jump Notification}")
     String subject;
+    @Value("${app.mail.address.hospital.service:hospital-service@gmail.com}")
+    String hospitalServiceEmail;
 
     public NotificationDataProviderImpl(@Lazy RestTemplate restTemplate, JavaMailSender mailSender) {
         this.restTemplate = restTemplate;
@@ -37,14 +40,17 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
 
     @Override
     public NotificationData getData(long patientId) {
-        ResponseEntity<NotificationData> response =
-                restTemplate.exchange(getFullUrl(patientId),
-                        HttpMethod.GET, null, NotificationData.class);
-        NotificationData notificationData = response.getBody();
-        if (notificationData == null) {
-            log.error("there is no data for patient id: {}", patientId);
-        } else {
-            log.debug("doctor's email received from data provider: {}", notificationData.doctorEmail);
+        NotificationData notificationData = null;
+        try {
+            ResponseEntity<NotificationData> response =
+                    restTemplate.exchange(getFullUrl(patientId),
+                            HttpMethod.GET, null, NotificationData.class);
+            notificationData = response.getBody();
+            if (notificationData != null) {
+                LOG.debug("doctor's email received from data provider: {}", notificationData.doctorEmail);
+            }
+        } catch (RestClientException e) {
+            LOG.error("Notification Data Provider has not sent the data; reason: {}",e.getMessage());
         }
         return notificationData;
     }
@@ -63,21 +69,30 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
 
     private void sendMail(PulseJump jump) {
         NotificationData data = this.getData(jump.patientId);
+        if (data == null) {
+            LOG.warn("Mail will be sent to the emergency service");
+            data = new NotificationData(hospitalServiceEmail, "Hospital Service", "");
+        }
         SimpleMailMessage smm = new SimpleMailMessage();
         smm.setTo(data.doctorEmail);
         smm.setSubject(subject + " " + data.patientName);
-        String text = getMailText(jump, data);
+        String text = getMailText(jump, data, jump.patientId);
         smm.setText(text);
         mailSender.send(smm);
         LOG.trace("sent text mail {}", text);
     }
 
-    private String getMailText(PulseJump jump, NotificationData data) {
-        return String.format("""
+    private String getMailText(PulseJump jump, NotificationData data, long patientId) {
+        String res = "Notification Data Provider Service has not sent"
+                + " data for patient " + patientId;
+        if (!data.patientName.isEmpty()) {
+            res = String.format("""
                         Dear Dr. %s
                         Patient %s has pulse jump
                         previous value: %d; current value: %d
                         """,
-                data.doctorName, data.patientName, jump.previousValue, jump.currentValue);
+                    data.doctorName, data.patientName, jump.previousValue, jump.currentValue);
+        }
+        return res;
     }
 }

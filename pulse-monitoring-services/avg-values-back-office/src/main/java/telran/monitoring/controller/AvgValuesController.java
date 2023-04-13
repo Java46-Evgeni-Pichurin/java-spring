@@ -1,13 +1,18 @@
 package telran.monitoring.controller;
 
+import jakarta.validation.constraints.Pattern;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import telran.monitoring.service.AvgPulseValuesService;
+
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(value = "/pulse/values")
+@RequestMapping(value="/pulse/values")
+@Validated
 public class AvgValuesController {
+    private static final String ISO_DATE_TIME = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}";
     AvgPulseValuesService service;
 
     public AvgValuesController(AvgPulseValuesService service) {
@@ -15,9 +20,11 @@ public class AvgValuesController {
     }
 
     @GetMapping("{id}")
-    Integer getAvgValue(@PathVariable("id") long patientId,
-                        @RequestParam(name = "from", required = false) String fromDateTime,
-                        @RequestParam(name = "to", required = false) String toDateTime) {
+    Integer getAvgValue(@PathVariable ("id") long patientId,
+                        @RequestParam (name = "from", required = false)
+                        @Pattern(regexp = ISO_DATE_TIME, message="wrong date/time format 'from'")String fromDateTime,
+                        @RequestParam(name = "to", required=false)
+                        @Pattern(regexp = ISO_DATE_TIME, message="wrong date/time format 'to'")String toDateTime) {
         if (fromDateTime == null && toDateTime == null) {
             return service.getAvgPulseValue(patientId);
         }
