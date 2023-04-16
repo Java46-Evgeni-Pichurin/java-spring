@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 import telran.monitoring.entities.mongodb.AvgPulseDoc;
 import telran.monitoring.model.PulseProbe;
+import telran.monitoring.repo.AvgPulseRepository;
 import telran.monitoring.service.AvgPulseValuesService;
 
 @SpringBootTest
@@ -23,7 +24,7 @@ public class AvgValuesServiceTest {
     private static final long PATIENT_ID_1 = 124;
     private static final int VALUE4 = 150;
     @Autowired
-    BackOfficeRepository backOfficeRepository;
+    AvgPulseRepository avgPulseRepository;
     @Autowired
     AvgPulseValuesService avgValuesService;
     PulseProbe probe1 = new PulseProbe(PATIENT_ID, System.currentTimeMillis(), 0, VALUE1);
@@ -33,10 +34,10 @@ public class AvgValuesServiceTest {
 
     @BeforeEach
     void addValues() {
-        backOfficeRepository.save(AvgPulseDoc.of(probe1));
-        backOfficeRepository.save(AvgPulseDoc.of(probe2));
-        backOfficeRepository.save(AvgPulseDoc.of(probe3));
-        backOfficeRepository.save(AvgPulseDoc.of(probe4));
+        avgPulseRepository.save(AvgPulseDoc.of(probe1));
+        avgPulseRepository.save(AvgPulseDoc.of(probe2));
+        avgPulseRepository.save(AvgPulseDoc.of(probe3));
+        avgPulseRepository.save(AvgPulseDoc.of(probe4));
     }
 
     @Test

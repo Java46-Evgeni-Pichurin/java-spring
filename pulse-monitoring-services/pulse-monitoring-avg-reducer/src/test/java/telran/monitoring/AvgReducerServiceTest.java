@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 
 import telran.monitoring.entities.redis.ProbesList;
 import telran.monitoring.model.PulseProbe;
+import telran.monitoring.repo.ProbesListRepository;
 import telran.monitoring.service.AvgReducerService;
 
 @SpringBootTest
@@ -30,7 +31,7 @@ class AvgReducerServiceTest {
     @Autowired
     AvgReducerService service;
     @MockBean
-    AvgReducerRepository avgReducerRepository;
+    ProbesListRepository probesListRepository;
 
     static ProbesList listNoAvgValue = new ProbesList(PATIENT_NO_AVG);
     static ProbesList listAvgValue = new ProbesList(PATIENT_AVG);
@@ -46,9 +47,9 @@ class AvgReducerServiceTest {
 
     @BeforeEach
     void redisMocking() {
-        when(avgReducerRepository.findById(PATIENT_NO_REDIS_DATA)).thenReturn(Optional.empty());
-        when(avgReducerRepository.findById(PATIENT_NO_AVG)).thenReturn(Optional.of(listNoAvgValue));
-        when(avgReducerRepository.findById(PATIENT_AVG)).thenReturn(Optional.of(listAvgValue));
+        when(probesListRepository.findById(PATIENT_NO_REDIS_DATA)).thenReturn(Optional.empty());
+        when(probesListRepository.findById(PATIENT_NO_AVG)).thenReturn(Optional.of(listNoAvgValue));
+        when(probesListRepository.findById(PATIENT_AVG)).thenReturn(Optional.of(listAvgValue));
     }
 
     @Test
