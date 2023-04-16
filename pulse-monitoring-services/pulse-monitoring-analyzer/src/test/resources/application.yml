@@ -1,0 +1,11 @@
+app:
+  jumps:
+    binding:
+      name: jumps-out-0
+logging:
+  level:
+    telran: trace
+spring:
+  cloud:
+    config:
+      enabled: false

@@ -1,0 +1,19 @@
+logging:
+  level:
+    telran: trace
+
+spring:
+  kafka:
+    bootstrap-servers: glider.srvs.cloudkafka.com:9094
+    properties:
+      security:
+        protocol: SASL_SSL
+      sasl:
+        mechanism: SCRAM-SHA-512
+        jaas:
+          config: org.apache.kafka.common.security.scram.ScramLoginModule required username="kclgkokd" password="${CLOUDKARAFKA_PASSWORD}";
+  cloud:
+    stream:
+      bindings:
+        pulseProbeSupplier-out-0:
+          destination: kclgkokd-default
