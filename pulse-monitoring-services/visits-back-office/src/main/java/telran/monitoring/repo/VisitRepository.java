@@ -2,7 +2,8 @@ package telran.monitoring.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import telran.monitoring.entities.jpa.Visit;
+import telran.monitoring.entities.Visit;
+
 
 import java.time.LocalDate;
 import java.util.List;

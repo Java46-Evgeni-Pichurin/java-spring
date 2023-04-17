@@ -13,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.binder.test.TestChannelBinderConfiguration;
 import org.springframework.context.annotation.Import;
 
-import telran.monitoring.entities.redis.LastProbe;
+import telran.monitoring.entities.LastProbe;
 import telran.monitoring.model.*;
 import telran.monitoring.repo.AnalyzerRepository;
 import telran.monitoring.service.AnalyzerService;

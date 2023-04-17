@@ -1,9 +1,11 @@
-package telran.monitoring.entities.jpa;
-
-import java.time.LocalDate;
+package telran.monitoring.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "visits", indexes = {@Index(columnList = "patient_id")})

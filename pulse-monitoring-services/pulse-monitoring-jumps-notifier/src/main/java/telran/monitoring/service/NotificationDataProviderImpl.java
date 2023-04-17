@@ -33,7 +33,7 @@ public class NotificationDataProviderImpl implements NotificationDataProvider {
     @Value("${app.mail.address.hospital.service:hospital-service@gmail.com}")
     String hospitalServiceEmail;
 
-    public NotificationDataProviderImpl(@Lazy RestTemplate restTemplate, JavaMailSender mailSender) {
+    public NotificationDataProviderImpl(@Lazy RestTemplate restTemplate, @Lazy JavaMailSender mailSender) {
         this.restTemplate = restTemplate;
         this.mailSender = mailSender;
     }

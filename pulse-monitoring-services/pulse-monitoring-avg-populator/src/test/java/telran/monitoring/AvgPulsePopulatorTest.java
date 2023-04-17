@@ -14,7 +14,7 @@ import org.springframework.cloud.stream.binder.test.TestChannelBinderConfigurati
 import org.springframework.context.annotation.Import;
 import org.springframework.messaging.support.GenericMessage;
 
-import telran.monitoring.entities.mongodb.AvgPulseDoc;
+import telran.monitoring.entities.AvgPulseDoc;
 import telran.monitoring.model.PulseProbe;
 import telran.monitoring.repo.AvgPulseRepository;
 

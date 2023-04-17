@@ -27,7 +27,7 @@ class NotificationDataProviderTest {
     }
 
     @Test
-    @Sql(scripts = {"DoctorsPatientsVisits.sql"})
+    @Sql(scripts={"classpath:DoctorsPatientsVisits.sql"})
     void test() throws Exception {
         String jsonResponse = mockMvc.perform(get("/data/123"))
                 .andExpect(status().isOk()).andReturn().getResponse()

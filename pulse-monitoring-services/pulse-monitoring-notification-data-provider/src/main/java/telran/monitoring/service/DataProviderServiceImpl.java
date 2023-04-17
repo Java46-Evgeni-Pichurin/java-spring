@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import telran.exceptions.NotFoundException;
-import telran.monitoring.entities.jpa.Doctor;
-import telran.monitoring.entities.jpa.Patient;
+import telran.monitoring.entities.*;
 import telran.monitoring.model.NotificationData;
 import telran.monitoring.repo.*;
 

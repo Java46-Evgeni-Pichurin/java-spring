@@ -6,9 +6,8 @@ import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import telran.monitoring.entities.redis.LastProbe;
-import telran.monitoring.model.PulseJump;
-import telran.monitoring.model.PulseProbe;
+import telran.monitoring.entities.LastProbe;
+import telran.monitoring.model.*;
 import telran.monitoring.repo.AnalyzerRepository;
 
 @Service

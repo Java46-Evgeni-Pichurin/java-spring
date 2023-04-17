@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import telran.exceptions.NotFoundException;
-import telran.monitoring.entities.jpa.*;
+import telran.monitoring.entities.*;
 import telran.monitoring.model.*;
 import telran.monitoring.repo.*;
 

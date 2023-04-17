@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 
-import telran.monitoring.entities.mongodb.AvgPulseDoc;
+import telran.monitoring.entities.AvgPulseDoc;
 import telran.monitoring.model.PulseProbe;
 import telran.monitoring.repo.AvgPulseRepository;
 import telran.monitoring.service.AvgPulseValuesService;

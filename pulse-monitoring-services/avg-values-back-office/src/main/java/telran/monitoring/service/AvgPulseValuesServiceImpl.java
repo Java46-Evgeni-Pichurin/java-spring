@@ -4,16 +4,15 @@ import java.time.LocalDateTime;
 
 import org.bson.Document;
 import org.slf4j.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import telran.monitoring.entities.mongodb.AvgPulseDoc;
+import telran.monitoring.entities.AvgPulseDoc;
 
-import static telran.monitoring.entities.mongodb.AvgPulseDoc.*;
+import static telran.monitoring.entities.AvgPulseDoc.*;
 
 @Service
 public class AvgPulseValuesServiceImpl implements AvgPulseValuesService{

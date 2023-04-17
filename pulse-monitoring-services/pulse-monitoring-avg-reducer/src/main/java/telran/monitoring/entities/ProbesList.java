@@ -1,10 +1,13 @@
-package telran.monitoring.entities.redis;
+package telran.monitoring.entities;
 
-import java.util.*;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RedisHash
 @AllArgsConstructor

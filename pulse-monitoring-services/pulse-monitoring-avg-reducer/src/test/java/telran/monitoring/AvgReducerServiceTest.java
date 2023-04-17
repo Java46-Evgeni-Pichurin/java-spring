@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cloud.stream.binder.test.TestChannelBinderConfiguration;
 import org.springframework.context.annotation.Import;
 
-import telran.monitoring.entities.redis.ProbesList;
+import telran.monitoring.entities.ProbesList;
 import telran.monitoring.model.PulseProbe;
 import telran.monitoring.repo.ProbesListRepository;
 import telran.monitoring.service.AvgReducerService;

@@ -59,8 +59,8 @@
 			<version>0.0.1</version>
 		</dependency>
 		<dependency>
-			<groupId>telran.monitoring.entities</groupId>
-			<artifactId>pulse-monitoring-entities</artifactId>
+			<groupId>telran.monitoring</groupId>
+			<artifactId>pulse-monitoring-dto</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 	</dependencies>

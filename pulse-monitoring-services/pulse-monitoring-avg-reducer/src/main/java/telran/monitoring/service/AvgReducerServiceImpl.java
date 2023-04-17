@@ -11,7 +11,7 @@ import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import telran.monitoring.entities.redis.ProbesList;
+import telran.monitoring.entities.ProbesList;
 import telran.monitoring.model.PulseProbe;
 import telran.monitoring.repo.ProbesListRepository;
 

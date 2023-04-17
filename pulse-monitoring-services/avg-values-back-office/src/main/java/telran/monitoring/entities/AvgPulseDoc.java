@@ -1,11 +1,13 @@
-package telran.monitoring.entities.mongodb;
-
-import java.time.*;
-import java.util.Objects;
+package telran.monitoring.entities;
 
 import lombok.Getter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import telran.monitoring.model.PulseProbe;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Objects;
 
 
 @Document(collection = "documents")
