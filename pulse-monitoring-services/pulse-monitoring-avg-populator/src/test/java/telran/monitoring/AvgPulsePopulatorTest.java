@@ -17,7 +17,6 @@ import org.springframework.messaging.support.GenericMessage;
 import telran.monitoring.entities.AvgPulseDoc;
 import telran.monitoring.model.PulseProbe;
 import telran.monitoring.repo.AvgPulseRepository;
-
 @SpringBootTest
 @Import(TestChannelBinderConfiguration.class)
 class AvgPulsePopulatorTest {
@@ -28,13 +27,12 @@ class AvgPulsePopulatorTest {
     @Autowired
     InputDestination producer;
     @Autowired
-    AvgPulseRepository avgPulseRepository;
+    AvgPulseRepository pulseRepository;
     PulseProbe pulseProbe1 = new PulseProbe(PATIENT_ID1, 0, 0, VALUE1);
     PulseProbe pulseProbe2 = new PulseProbe(PATIENT_ID2, 0, 0, VALUE2);
     AvgPulseDoc doc1 = AvgPulseDoc.of(pulseProbe1);
     AvgPulseDoc doc2 = AvgPulseDoc.of(pulseProbe2);
     String bindingName = "avgPulseConsumer-in-0";
-
     @BeforeAll
     static void setUpBeforeClass() {
     }
@@ -43,7 +41,7 @@ class AvgPulsePopulatorTest {
     void test() {
         producer.send(new GenericMessage<>(pulseProbe1), bindingName);
         producer.send(new GenericMessage<>(pulseProbe2), bindingName);
-        List<AvgPulseDoc> documents = avgPulseRepository.findAll();
+        List<AvgPulseDoc> documents = pulseRepository.findAll();
         List<AvgPulseDoc> expected = Arrays.asList(doc1, doc2);
         assertIterableEquals(expected, documents);
     }

@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Objects;
 
-
 @Document(collection = "documents")
 @Getter
 public class AvgPulseDoc {

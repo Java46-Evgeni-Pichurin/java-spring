@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Validated
 public class AvgValuesController {
     private static final String ISO_DATE_TIME = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}";
-    AvgPulseValuesService service;
+    private final AvgPulseValuesService service;
 
     public AvgValuesController(AvgPulseValuesService service) {
         this.service = service;

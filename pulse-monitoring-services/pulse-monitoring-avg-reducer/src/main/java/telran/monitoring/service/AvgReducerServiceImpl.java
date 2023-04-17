@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,15 +18,11 @@ import telran.monitoring.repo.ProbesListRepository;
 public class AvgReducerServiceImpl implements AvgReducerService {
     static Logger LOG = LoggerFactory.getLogger(AvgReducerService.class);
     private final ProbesListRepository probesListRepository;
-    private final StreamBridge streamBridge;
     @Value("${app.reducing.size: 3}")
     int reducingSize;
-    @Value("${app.avg.binding.name}")
-    String bindingName;
 
-    public AvgReducerServiceImpl(ProbesListRepository probesListRepository, StreamBridge streamBridge) {
+    public AvgReducerServiceImpl(ProbesListRepository probesListRepository) {
         this.probesListRepository = probesListRepository;
-        this.streamBridge = streamBridge;
     }
 
     @Transactional
@@ -55,16 +50,5 @@ public class AvgReducerServiceImpl implements AvgReducerService {
     @PostConstruct
     void inintDebugInfo() {
         LOG.debug("reducing size is {}", reducingSize);
-    }
-
-    @Override
-    public void processPulseProbe(PulseProbe probe) {
-        Integer avgValue = this.reduce(probe);
-        if (avgValue != null) {
-            LOG.debug("for patient {} avg value is {}", probe.patientId, avgValue);
-            streamBridge.send(bindingName, new PulseProbe(probe.patientId, System.currentTimeMillis(), 0, avgValue));
-        } else {
-            LOG.trace("for patient {} no avg value yet", probe.patientId);
-        }
     }
 }

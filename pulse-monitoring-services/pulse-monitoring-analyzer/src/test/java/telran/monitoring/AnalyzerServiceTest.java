@@ -17,7 +17,7 @@ import telran.monitoring.entities.LastProbe;
 import telran.monitoring.model.*;
 import telran.monitoring.repo.AnalyzerRepository;
 import telran.monitoring.service.AnalyzerService;
-@SpringBootTest(classes = AnalyzerAppl.class)
+@SpringBootTest
 @Import(TestChannelBinderConfiguration.class)
 class AnalyzerServiceTest {
 	 static final Long PATIENT_NO_REDIS_DATA = 123L;

@@ -6,7 +6,7 @@ app:
     binding:
       name: avg-reducer-out-0
   reducing:
-    size: 3
+    size: 2
 spring:
   cloud:
     config:

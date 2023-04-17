@@ -23,9 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import telran.monitoring.model.*;
 import telran.monitoring.service.AnalyzerService;
 
-@SpringBootTest(classes = AnalyzerAppl.class)
-@Import(TestChannelBinderConfiguration.class)
-//loading to Application Context producer/consumer for Spring Cloud Messaging
+@SpringBootTest
+@Import(TestChannelBinderConfiguration.class) //loading to Application Context producer/consumer for Spring Cloud Messaging
 public class AnalyzerControllerTest {
     private static final long PATIENT_ID_NO_JUMP = 123;
     private static final int VALUE = 100;
@@ -37,12 +36,13 @@ public class AnalyzerControllerTest {
     InputDestination producer;
     @Autowired
     OutputDestination consumer;
-    PulseProbe probeNoJump = new PulseProbe(PATIENT_ID_NO_JUMP, 0, 0, VALUE);
-    PulseProbe probeJump = new PulseProbe(PATIENT_ID_JUMP, 0, 0, VALUE);
+
+    PulseProbe probeNoJump = new PulseProbe(PATIENT_ID_NO_JUMP,0,0, VALUE);
+    PulseProbe probeJump = new PulseProbe(PATIENT_ID_JUMP,0,0, VALUE);
     PulseJump jump = new PulseJump(PATIENT_ID_JUMP, VALUE, VALUE_JUMP);
 
     String bindingNameProducer = "pulseProbeConsumer-in-0";
-    @Value("${app.jumps.binding.name}")
+    @Value("${app.jumps.binding.name:jumps-out-0}")
     String bindingNameConsumer;
 
     @BeforeEach
@@ -54,14 +54,14 @@ public class AnalyzerControllerTest {
     @Test
     void receivingProbNoJump() {
         producer.send(new GenericMessage<>(probeNoJump), bindingNameProducer);
-        Message<byte[]> message = consumer.receive(10, bindingNameConsumer);
+        Message<byte[]> message = consumer.receive(100, bindingNameConsumer);
         assertNull(message);
     }
 
     @Test
     void receivingProbJump() throws Exception {
         producer.send(new GenericMessage<>(probeJump), bindingNameProducer);
-        Message<byte[]> message = consumer.receive(10, bindingNameConsumer);
+        Message<byte[]> message = consumer.receive(100, bindingNameConsumer);
         assertNotNull(message);
         ObjectMapper mapper = new ObjectMapper();
         PulseJump jump = mapper.readValue(message.getPayload(), PulseJump.class);

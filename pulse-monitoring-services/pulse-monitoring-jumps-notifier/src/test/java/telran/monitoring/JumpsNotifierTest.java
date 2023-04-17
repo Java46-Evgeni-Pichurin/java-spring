@@ -23,7 +23,6 @@ import jakarta.mail.internet.MimeMessage;
 import telran.monitoring.model.NotificationData;
 import telran.monitoring.model.PulseJump;
 import telran.monitoring.service.NotificationDataProvider;
-
 @SpringBootTest(classes = JumpsNotifierAppl.class)
 @Import(TestChannelBinderConfiguration.class)
 class JumpsNotifierTest {
@@ -42,7 +41,6 @@ class JumpsNotifierTest {
             new GreenMailExtension(ServerSetupTest.SMTP)
                     .withConfiguration(GreenMailConfiguration.aConfig().withUser("pulse", "12345.com"));
     PulseJump pulseJump = new PulseJump(PATIENT_ID, PREVIOUS_VALUE, CURRENT_VALUE);
-
     @BeforeAll
     static void setUpBeforeClass() {
     }
@@ -51,7 +49,7 @@ class JumpsNotifierTest {
     void test() throws MessagingException {
         when(dataProvider.getData(PATIENT_ID))
                 .thenReturn(new NotificationData(DOCTOR_EMAIL, DOCTOR_NAME, PATIENT_NAME));
-        producer.send(new GenericMessage<>(pulseJump), "jumpsConsumer-in-0");
+        producer.send(new GenericMessage<PulseJump>(pulseJump),"jumpsConsumer-in-0");
         MimeMessage message = mailExtension.getReceivedMessages()[0];
         assertEquals(DOCTOR_EMAIL, message.getAllRecipients()[0].toString());
         assertTrue(message.getSubject().contains(PATIENT_NAME));

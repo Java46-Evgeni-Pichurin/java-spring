@@ -14,4 +14,4 @@ de:
   flapdoodle:
     mongodb:
       embedded:
-        version: 402
+        version: 4.0.2
