@@ -1,0 +1,6 @@
+telran\monitoring\model\PulseProbe.class
+telran\monitoring\model\VisitDto.class
+telran\monitoring\model\PatientDto.class
+telran\monitoring\model\PulseJump.class
+telran\monitoring\model\NotificationData.class
+telran\monitoring\model\DoctorDto.class

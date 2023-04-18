@@ -1,0 +1,6 @@
+telran\spring\accounting\service\AccountingService.class
+telran\spring\accounting\service\AccountingServiceImpl.class
+telran\spring\accounting\controller\AccountingController.class
+telran\spring\accounting\AccountingManagementApplication.class
+telran\spring\accounting\secrity\SecurityConfiguration.class
+telran\spring\accounting\model\Account.class

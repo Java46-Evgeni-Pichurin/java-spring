@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pulse-monitoring-analyzer" />
+        <module name="pulse-monitoring-avg-populator" />
+        <module name="pulse-monitoring-gateway" />
+        <module name="accounting-management" />
+        <module name="exception-handling" />
+        <module name="pulse-monitoring-dto" />
+        <module name="pulse-monitoring-configuration-server" />
+        <module name="pulse-monitoring-jumps-notifier" />
+        <module name="pulse-monitoring-avg-reducer" />
+        <module name="pulse-probes-imitator" />
+        <module name="visits-back-office" />
+        <module name="avg-values-back-office" />
+        <module name="pulse-monitoring-notification-data-provider" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="accounting-management" options="-parameters" />
+      <module name="avg-values-back-office" options="-parameters" />
+      <module name="pulse-monitoring-analyzer" options="-parameters" />
+      <module name="pulse-monitoring-avg-populator" options="-parameters" />
+      <module name="pulse-monitoring-avg-reducer" options="-parameters" />
+      <module name="pulse-monitoring-configuration-server" options="-parameters" />
+      <module name="pulse-monitoring-gateway" options="-parameters" />
+      <module name="pulse-monitoring-jumps-notifier" options="-parameters" />
+      <module name="pulse-monitoring-notification-data-provider" options="-parameters" />
+      <module name="pulse-probes-imitator" options="-parameters" />
+      <module name="visits-back-office" options="-parameters" />
+    </option>
+  </component>
+</project>
